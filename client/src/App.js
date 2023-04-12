@@ -5,6 +5,7 @@ import DetailsContainer from "./components/DetailsContainer/DetailsContainer";
 import axios from "axios";
 import {useDispatch} from "react-redux";
 import {countryByName} from "./redux/actions";
+axios.defaults.baseURL = "http://localhost:3001";
 
 
 function App() {
@@ -13,7 +14,7 @@ function App() {
 
     const onSearch = (countryName) => {
         axios
-            .get(`http://localhost:3001/countries/?name=${countryName}`)
+            .get(`/countries/?name=${countryName}`)
             .then((response) => {
                 dispatch(countryByName(response.data));
 /*                console.log("Este es el contenido de response.data",response.data)

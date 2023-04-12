@@ -119,7 +119,7 @@ const Form = () => {
 // ! Esta función envía los datos al servidor cuado se aprieta id botón enviar
     const submitHandler = (event) => {
         event.preventDefault()
-        const response = axios.post("http://localhost:3001/activities", form)
+        const response = axios.post("/activities", form)
             .then(res => alert("Activity added successfully!")
                 .catch(err => alert(err)))
     }

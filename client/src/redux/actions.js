@@ -14,7 +14,7 @@ export const getCountries = () => {
     return async function (dispatch) {
         try{
         const dbData = await axios.get(
-            "http://localhost:3001/countries/"
+            "/countries/"
         );
         const countries = dbData.data;
         dispatch({ type: GET_COUNTRIES, payload: countries });
@@ -28,11 +28,12 @@ export const getCountries = () => {
 //! Esta función trae un country por id desde el endpoint
 export const getCountryById = (countryId) => {
     return function (dispatch) {
-        fetch(`http://localhost:3001/countries/?id=${countryId}`)
-            .then(response => response.json())
-            .then((data) => {
-                // console.log("Este es el contenido de data",data); // Agregar aquí el console.log
-                dispatch({ type: GET_COUNTRY_BY_ID, payload: data });
+        axios.get(`/countries/?id=${countryId}`)
+            .then(response => {
+                dispatch({ type: GET_COUNTRY_BY_ID, payload: response.data });
+            })
+            .catch(error => {
+                console.log(error);
             });
     };
 };
