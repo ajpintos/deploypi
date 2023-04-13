@@ -5,7 +5,7 @@ import DetailsContainer from "./components/DetailsContainer/DetailsContainer";
 import axios from "axios";
 import {useDispatch} from "react-redux";
 import {countryByName} from "./redux/actions";
-axios.defaults.baseURL = "http://localhost:3001";
+axios.defaults.baseURL = "deploypi-production-ae2e.up.railway.app";
 
 
 function App() {
