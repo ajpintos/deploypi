@@ -22,7 +22,7 @@ const { conn } = require('./src/db.js');
 require('dotenv').config();
 
 // Syncing all the models at once.
-conn.sync({ alter: true }).then(() => {
+conn.sync({ force: true }).then(() => {
   app.listen(process.env.PORT, () => {
     console.log('Servidor corriendo en el puerto' , process.env.PORT);
   });
