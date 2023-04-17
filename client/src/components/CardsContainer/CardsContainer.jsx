@@ -42,7 +42,7 @@ const CardsContainer = () => {
     const usersPerPage = 10;
     const pagesVisited = pageNumber * usersPerPage;
 
-    const displayCountries = countries.slice(pagesVisited, pagesVisited + usersPerPage).map(country => {
+    const displayCountries = async () => countries.slice(pagesVisited, pagesVisited + usersPerPage).map(country => {
         return <Card
             id={country.id}
             name={country.name}
