@@ -11,6 +11,7 @@ axios.defaults.baseURL = "deploypi-production-ae2e.up.railway.app";
 
 
 function App() {
+    //! Spinner Loader
     const [loading, setLoading] = useState(false);
     useEffect(() => {
     setLoading(true)
