@@ -1,10 +1,13 @@
 import {Home, Landing, Form} from "./views";
 import {Route, useLocation} from "react-router-dom";
-import NavBar from "./components/NavBar/NavBar";
-import DetailsContainer from "./components/DetailsContainer/DetailsContainer";
+// import NavBar from "./components/NavBar/NavBar";
+const NavBar = React.lazy(() => import("./components/NavBar/NavBar"));
+// import DetailsContainer from "./components/DetailsContainer/DetailsContainer";
+const DetailsContainer = React.lazy(() => import("./components/DetailsContainer/DetailsContainer"));
 import axios from "axios";
 import {useDispatch} from "react-redux";
 import {countryByName} from "./redux/actions";
+import {Suspense} from "react";
 axios.defaults.baseURL = "deploypi-production-ae2e.up.railway.app";
 
 
@@ -24,6 +27,7 @@ function App() {
 
 
     return (
+        <Suspense fallback={<h1>Loading...</h1>}>
         <div className="App">
             {location.pathname !== "/" && <NavBar onSearch={onSearch}/>}
             <Route exact path="/" component={Landing}/>
@@ -31,6 +35,7 @@ function App() {
             <Route exact path="/create" component={Form}/>
             <Route exact path="/home" component={Home}/>
         </div>
+        </Suspense>
     );
 }
 
