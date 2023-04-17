@@ -1,5 +1,6 @@
-import React, {useState} from 'react';
-import Card from '../Card/Card';
+import React, {lazy, Suspense, useState} from 'react';
+// import Card from '../Card/Card';
+const Card = lazy(() => import('../Card/Card'));
 import style from './CardsContainer.module.css';
 import {useDispatch, useSelector} from "react-redux";
 import App from "../../App";
@@ -62,6 +63,7 @@ const CardsContainer = () => {
         pageNumbers.push(i);
     }
     return (
+        <Suspense fallback={<h1>Loading...</h1>}>
         <>
             <div className={style.filters}>
                 <h3>Order Alphabetically</h3>
@@ -98,6 +100,7 @@ const CardsContainer = () => {
                     ))}
                 </div>
 
-        </>);
+        </>
+            </Suspense>);
 }
 export default CardsContainer;
