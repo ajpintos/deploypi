@@ -103,6 +103,7 @@ const CardsContainer = () => {
                 <ClipLoader
                     color={"#123abc"}
                     loading={loading}
+                    className={style.loader}
                     size={30}
                     aria-label="Loading Spinner"
                     data-testid="loader"
