@@ -44,14 +44,24 @@ const CardsContainer = () => {
     const pagesVisited = pageNumber * usersPerPage;
 
     const displayCountries = countries.slice(pagesVisited, pagesVisited + usersPerPage).map(country => {
-        return <Card
+        return
+        {loading?
+            <ClipLoader
+                color={"#123abc"}
+                loading={loading}
+                className={style.loader}
+                size={30}
+                aria-label="Loading Spinner"
+                data-testid="loader"
+            />
+            :<Card
             id={country.id}
             name={country.name}
             flag={country.flag}
             continent={country.continent}
             capital={country.capital}
         />
-    })
+    }})
 
     //! SPINNER LOADER
     const [loading, setLoading] = useState(false);
@@ -99,19 +109,10 @@ const CardsContainer = () => {
                 </select>
 
             </div>
-            {loading?
-                <ClipLoader
-                    color={"#123abc"}
-                    loading={loading}
-                    className={style.loader}
-                    size={30}
-                    aria-label="Loading Spinner"
-                    data-testid="loader"
-                />
-                :
+
             <div className={style.container}>
                 {displayCountries}
-            </div>}
+            </div>
                 <div className={style.pagination}>
                     {pageNumbers.map(number => (
                         <button key={number} onClick={() => setPageNumber(number)}>
