@@ -1,9 +1,10 @@
-import React, {useState} from 'react';
+import React, {useEffect, useState} from 'react';
 import Card from '../Card/Card';
 import style from './CardsContainer.module.css';
 import {useDispatch, useSelector} from "react-redux";
 import App from "../../App";
 import {filterByContinent, sortByName, sortByPopulation} from "../../redux/actions";
+import {ClipLoader} from "react-spinners";
 
 const CardsContainer = () => {
 //! ************** FILTROS *********************
@@ -42,7 +43,7 @@ const CardsContainer = () => {
     const usersPerPage = 10;
     const pagesVisited = pageNumber * usersPerPage;
 
-    const displayCountries = async () => countries.slice(pagesVisited, pagesVisited + usersPerPage).map(country => {
+    const displayCountries = countries.slice(pagesVisited, pagesVisited + usersPerPage).map(country => {
         return <Card
             id={country.id}
             name={country.name}
@@ -51,6 +52,17 @@ const CardsContainer = () => {
             capital={country.capital}
         />
     })
+
+    //! Spinner Loader
+    const [loading, setLoading] = useState(false);
+    useEffect(() => {
+        setLoading(true)
+        setTimeout(() => {
+            setLoading(false)
+        }, 8000)
+    }, [])
+
+
     const pageCount = Math.ceil(countries.length / usersPerPage);
 
     const changePage = ({selected}) => {
@@ -87,9 +99,18 @@ const CardsContainer = () => {
                 </select>
 
             </div>
+            {loading?
+                <ClipLoader
+                    color={"#123abc"}
+                    loading={loading}
+                    size={30}
+                    aria-label="Loading Spinner"
+                    data-testid="loader"
+                />
+                :
             <div className={style.container}>
                 {displayCountries}
-            </div>
+            </div>}
                 <div className={style.pagination}>
                     {pageNumbers.map(number => (
                         <button key={number} onClick={() => setPageNumber(number)}>
