@@ -35,8 +35,7 @@ function App() {
 
     return (
         <Suspense fallback={<h1>Loading...</h1>}>
-        <div className="App">
-            loading?
+            {loading?
             <ClipLoader
             color={"#123abc"}
             loading={loading}
@@ -45,12 +44,13 @@ function App() {
             data-testid="loader"
         />
             :
+            <div className="App">
             {location.pathname !== "/" && <NavBar onSearch={onSearch}/>}
             <Route exact path="/" component={Landing}/>
             <Route exact path="/detail/:id" render={({match})=> <DetailsContainer id={match.params.id}/>}/>
             <Route exact path="/create" component={Form}/>
             <Route exact path="/home" component={Home}/>
-        </div>
+        </div>}
         </Suspense>
     );
 }
