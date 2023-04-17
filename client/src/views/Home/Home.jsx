@@ -3,12 +3,9 @@ import {lazy, Suspense, useEffect} from "react";
 import {useDispatch} from "react-redux";
 import {getCountries} from "../../redux/actions";
 import NavBar from "../../components/NavBar/NavBar";
+import App from "../../App";
 const CardsContainer = lazy(() => import('../../components/CardsContainer/CardsContainer'));
 
-
-
-
-import App from "../../App";
 const Home = () => {
     const dispatch = useDispatch();
 

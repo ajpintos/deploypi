@@ -1,10 +1,10 @@
 import React, {lazy, Suspense, useState} from 'react';
 // import Card from '../Card/Card';
-const Card = lazy(() => import('../Card/Card'));
 import style from './CardsContainer.module.css';
 import {useDispatch, useSelector} from "react-redux";
 import App from "../../App";
 import {filterByContinent, sortByName, sortByPopulation} from "../../redux/actions";
+const Card = lazy(() => import('../Card/Card'));
 
 const CardsContainer = () => {
 //! ************** FILTROS *********************
