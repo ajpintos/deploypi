@@ -1,12 +1,9 @@
-import React, {lazy, Suspense, useEffect, useState} from 'react';
-// import Card from '../Card/Card';
+import React, {useState} from 'react';
+import Card from '../Card/Card';
 import style from './CardsContainer.module.css';
 import {useDispatch, useSelector} from "react-redux";
 import App from "../../App";
 import {filterByContinent, sortByName, sortByPopulation} from "../../redux/actions";
-import {ClipLoader} from "react-spinners";
-
-const Card = lazy(() => import('../Card/Card'));
 
 const CardsContainer = () => {
 //! ************** FILTROS *********************
@@ -39,15 +36,6 @@ const CardsContainer = () => {
         setPageNumber(0);
     };
 
-    //! SPINNER LOADER
-    const [loading, setLoading] = useState(false);
-    useEffect(() => {
-        setLoading(true)
-        setTimeout(() => {
-            setLoading(false)
-        }, 8000)
-    }, [])
-
 //! ************** PAGINADO *********************
     const countries = useSelector(state => state.countries)
     const [pageNumber, setPageNumber] = useState(0);
@@ -74,44 +62,34 @@ const CardsContainer = () => {
         pageNumbers.push(i);
     }
     return (
-        <Suspense fallback={<h1>Loading...</h1>}>
-            {loading?
-                <ClipLoader
-                    color={"#123abc"}
-                    loading={loading}
-                    size={30}
-                    aria-label="Loading Spinner"
-                    data-testid="loader"
-                />
-                :
-                <>
-                <div className={style.filters}>
-                    <h3>Order Alphabetically</h3>
-                    <select onChange={event => handleSortByName(event)}>
-                        <option value="asc">Asc</option>
-                        <option value="desc">Desc</option>
-                    </select>
-                    <h3>By Continent</h3>
-                    <select onChange={event => handleFilterByContinent(event)}>
-                        <option value="All">All</option>
-                        <option value="Africa">Africa</option>
-                        <option value="Antarctica">Antarctica</option>
-                        <option value="Asia">Asia</option>
-                        <option value="Europe">Europe</option>
-                        <option value="South America">South America</option>
-                        <option value="North America">North America</option>
-                        <option value="Oceania">Oceania</option>
-                    </select>
-                    <h3>Order By Population</h3>
-                    <select onChange={event => handleSortByPopulation(event)}>
-                        <option value="asc">Asc</option>
-                        <option value="desc">Desc</option>
-                    </select>
+        <>
+            <div className={style.filters}>
+                <h3>Order Alphabetically</h3>
+                <select onChange={event => handleSortByName(event)}>
+                    <option value="asc">Asc</option>
+                    <option value="desc">Desc</option>
+                </select>
+                <h3>By Continent</h3>
+                <select onChange={event => handleFilterByContinent(event)}>
+                    <option value="All">All</option>
+                    <option value="Africa">Africa</option>
+                    <option value="Antarctica">Antarctica</option>
+                    <option value="Asia">Asia</option>
+                    <option value="Europe">Europe</option>
+                    <option value="South America">South America</option>
+                    <option value="North America">North America</option>
+                    <option value="Oceania">Oceania</option>
+                </select>
+                <h3>Order By Population</h3>
+                <select onChange={event => handleSortByPopulation(event)}>
+                    <option value="asc">Asc</option>
+                    <option value="desc">Desc</option>
+                </select>
 
-                </div>
-                <div className={style.container}>
-                    {displayCountries}
-                </div>
+            </div>
+            <div className={style.container}>
+                {displayCountries}
+            </div>
                 <div className={style.pagination}>
                     {pageNumbers.map(number => (
                         <button key={number} onClick={() => setPageNumber(number)}>
@@ -119,7 +97,7 @@ const CardsContainer = () => {
                         </button>
                     ))}
                 </div>
-            </>}
-        </Suspense>);
+
+        </>);
 }
 export default CardsContainer;

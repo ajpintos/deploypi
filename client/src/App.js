@@ -1,25 +1,14 @@
 import {Home, Landing, Form} from "./views";
 import {Route, useLocation} from "react-router-dom";
+import NavBar from "./components/NavBar/NavBar";
+import DetailsContainer from "./components/DetailsContainer/DetailsContainer";
 import axios from "axios";
 import {useDispatch} from "react-redux";
 import {countryByName} from "./redux/actions";
-import {lazy, Suspense, useEffect, useState} from "react";
-import {ClipLoader} from "react-spinners";
-const NavBar = lazy(() => import("./components/NavBar/NavBar"));
-const DetailsContainer = lazy(() => import("./components/DetailsContainer/DetailsContainer"));
-axios.defaults.baseURL = "deploypi-production-ae2e.up.railway.app";
+axios.defaults.baseURL = "http://localhost:3001";
 
 
 function App() {
-    //! Spinner Loader
-    const [loading, setLoading] = useState(false);
-    useEffect(() => {
-    setLoading(true)
-    setTimeout(() => {
-        setLoading(false)
-    }, 8000)
-    }, [])
-
     const location = useLocation();
     const dispatch = useDispatch();
 
@@ -35,24 +24,13 @@ function App() {
 
 
     return (
-        <Suspense fallback={<h1>Loading...</h1>}>
-            {loading?
-            <ClipLoader
-            color={"#123abc"}
-            loading={loading}
-            size={30}
-            aria-label="Loading Spinner"
-            data-testid="loader"
-        />
-            :
-            <div className="App">
+        <div className="App">
             {location.pathname !== "/" && <NavBar onSearch={onSearch}/>}
             <Route exact path="/" component={Landing}/>
             <Route exact path="/detail/:id" render={({match})=> <DetailsContainer id={match.params.id}/>}/>
             <Route exact path="/create" component={Form}/>
             <Route exact path="/home" component={Home}/>
-        </div>}
-        </Suspense>
+        </div>
     );
 }
 
