@@ -1,13 +1,13 @@
 import {Home, Landing, Form} from "./views";
 import {Route, useLocation} from "react-router-dom";
 // import NavBar from "./components/NavBar/NavBar";
-const NavBar = React.lazy(() => import("./components/NavBar/NavBar"));
+const NavBar = lazy(() => import("./components/NavBar/NavBar"));
 // import DetailsContainer from "./components/DetailsContainer/DetailsContainer";
-const DetailsContainer = React.lazy(() => import("./components/DetailsContainer/DetailsContainer"));
+const DetailsContainer = lazy(() => import("./components/DetailsContainer/DetailsContainer"));
 import axios from "axios";
 import {useDispatch} from "react-redux";
 import {countryByName} from "./redux/actions";
-import {Suspense} from "react";
+import {lazy, Suspense} from "react";
 axios.defaults.baseURL = "deploypi-production-ae2e.up.railway.app";
 
 
