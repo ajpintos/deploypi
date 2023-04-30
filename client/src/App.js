@@ -25,7 +25,7 @@ function App() {
 
     return (
         <div className="App">
-            {location.pathname !== "/countries/" && <NavBar onSearch={onSearch}/>}
+            {location.pathname !== "/countries/" && location.pathname !== "/countries" && <NavBar onSearch={onSearch}/>}
             <Route exact path="/countries" component={Landing}/>
             <Route exact path="/detail/:id" render={({match})=> <DetailsContainer id={match.params.id}/>}/>
             <Route exact path="/create" component={Form}/>
