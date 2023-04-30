@@ -29,7 +29,7 @@ function NavBar({onSearch}) {
             </div>
 
             <div className={style.columna3}>
-                <p><Link to="/">HOME</Link></p>
+                <p><Link to="/countries">HOME</Link></p>
             </div>
 
             <div className={style.columna4}>

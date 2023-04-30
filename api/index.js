@@ -21,7 +21,7 @@ const app = require('./src/app.js');
 const { conn } = require('./src/db.js');
 require('dotenv').config();
 
-// Syncing all the models at once.
+//! Forzar sequelize a sincronizar las tablas
 conn.sync({ alter: true }).then(() => {
   app.listen(process.env.PORT, () => {
     console.log('Servidor corriendo en el puerto' , process.env.PORT);

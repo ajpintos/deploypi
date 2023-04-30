@@ -8,8 +8,9 @@ const activitiesRouter = require("./activitiesRouter");
 
 const mainRouter = Router();
 
-mainRouter.use("/countries", countriesRouter);
-mainRouter.use("/activities", activitiesRouter);
+//! Agregar a los routers cualquier cambio en la url del endpoint
+mainRouter.use("/countriesback/countries", countriesRouter);
+mainRouter.use("/countriesback/activities", activitiesRouter);
 
 /*mainRouter.get("/users",(req, res) => {
     res.status(200).send("Estoy pasando por usersssss");

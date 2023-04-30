@@ -5,7 +5,7 @@ import DetailsContainer from "./components/DetailsContainer/DetailsContainer";
 import axios from "axios";
 import {useDispatch} from "react-redux";
 import {countryByName} from "./redux/actions";
-axios.defaults.baseURL = "http://localhost:3001";
+axios.defaults.baseURL = "https://jpintos.dev/countriesback/";
 
 
 function App() {
@@ -25,8 +25,8 @@ function App() {
 
     return (
         <div className="App">
-            {location.pathname !== "/" && <NavBar onSearch={onSearch}/>}
-            <Route exact path="/" component={Landing}/>
+            {location.pathname !== "/countries/" && <NavBar onSearch={onSearch}/>}
+            <Route exact path="/countries" component={Landing}/>
             <Route exact path="/detail/:id" render={({match})=> <DetailsContainer id={match.params.id}/>}/>
             <Route exact path="/create" component={Form}/>
             <Route exact path="/home" component={Home}/>
